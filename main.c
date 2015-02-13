@@ -8,9 +8,10 @@
 
 size_t	strlen(const char *s);
 int	strcmp(char *s1, char *s2);
-char	*strcpy(char *dest, const char *src);
-void	*memset(void *s, int c, size_t n);
 int	strncmp(const char *s1, const char *s2, size_t n);
+char	*strcpy(char *dest, const char *src);
+char	*strncpy(char *dest, const char *src, size_t n);
+void	*memset(void *s, int c, size_t n);
 
 int	test_strlen()
 {
@@ -77,6 +78,20 @@ int	test_strcpy()
   return (0);
 }
 
+int	test_strncpy()
+{
+  char	*str = malloc(strlen(S1) + 1);
+
+  strncpy(str, S2, strlen(S2) + 1);
+  printf("%s\t == \t%s ? %i\n", str, S2, strcmp(str, S2));
+  assert(strcmp(str, S2) == 0);
+  memset(str, 0, strlen(S1) + 1);
+  strncpy(str, S1, strlen(S1) - 1);
+  printf("%s\t == \t%s ? %i\n", str, S2, strcmp(str, S2));
+  assert(strcmp(str, S2) == 0);
+  return (0);
+}
+
 int	test_memset()
 {
   char	*str = malloc(10);
@@ -98,6 +113,8 @@ int	main()
   test_strncmp();
   printf("test STRCPY\n");
   test_strcpy();
+  printf("test STRNCPY\n");
+  test_strncpy();
   printf("test MEMSET\n");
   test_memset();
   printf("All tests passed with succes\n");
