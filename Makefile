@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Wed Feb 11 17:19:02 2015 Arthur Poulet
+## Last update Fri Feb 13 13:49:34 2015 Arthur Poulet
 ##
 
 NAME		= testing
@@ -25,7 +25,9 @@ CC		= gcc
 
 NASMFLAGS	= -f elf64
 
-CCFLAGS		= -c -Wall
+CFLAGS		= -c -Wall
+
+LFLAGS		= -Wall
 
 RM		= rm -f
 
@@ -33,16 +35,14 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 		@echo -e "linking of $@"
-		$(CC) -o $(NAME) $(OBJS) $(CFLAGS)
+		$(CC) -o $(NAME) $(OBJS) $(LFLAGS)
 		@echo -e "$(NAME) Compiled"
 
 %.o:		%.S
-		@echo -e "assemblage of $@"
 		$(NASM) $(NASMFLAGS) -o $@ $<
 
 %.o:		%.c
-		@echo -e "compilation of $@"
-		@$(CC) $(CCFLAGS) -o $@ $< #2>/dev/null
+		$(CC) $(CFLAGS) -o $@ $<
 
 clean:
 		$(RM) $(OBJS)
