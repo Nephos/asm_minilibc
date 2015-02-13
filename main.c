@@ -14,11 +14,11 @@ int	strncmp(const char *s1, const char *s2, size_t n);
 
 int	test_strlen()
 {
-  printf("%s size : 9", S1);
+  printf("%s size : 9\n", S1);
   assert(strlen(S1) == 9);
-  printf("%s size : 8", S2);
+  printf("%s size : 8\n", S2);
   assert(strlen(S2) == 8);
-  printf("%s size : 0", SE);
+  printf("%s size : 0\n", SE);
   assert(strlen(SE) == 0);
   return (0);
 }
@@ -48,10 +48,13 @@ int	test_strcmp()
 
 int	test_strncmp()
 {
-  char	*str = S1;
+  char	*str1 = S1;
+  char	*str2 = S2;
 
-  assert(strncmp(str, S1, strlen(S1)) == 0);
-  assert(strncmp(str, S2, strlen(S1) - 1) == 0);
+  printf("%s == %s, %i\n", str1, S1, strncmp(str1, S1, strlen(S1)));
+  assert(strncmp(str1, S1, strlen(S1)) == 0);
+  printf("%s == %s, %i\n", str2, S2, strncmp(str1, S1, strlen(S1)));
+  assert(strncmp(str1, S2, strlen(S1) - 1) == 0);
   return (0);
 }
 

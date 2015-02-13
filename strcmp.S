@@ -1,6 +1,8 @@
 
 	SECTION	.text
+
 	GLOBAL	strcmp
+	GLOBAL	strncmp
 
 	;; 2 arguments, RSI, RDI
 strcmp:
@@ -23,9 +25,6 @@ _strcmp_end:
 	NEG	eax
 	RET
 
-	SECTION	.text
-	GLOBAL	strcmp
-
 	;; 3 arguments, RSI, RDI, RDX
 
 strncmp:
@@ -33,9 +32,8 @@ strncmp:
 	XOR	eax, eax
 
 _strncmp_loop:
-	CMP	rdx, 0
+	CMP	rdx, rcx
 	JE	_strcmp_end
-	DEC	rdx
 	MOV	al, BYTE [rsi + rcx]
 	CMP	BYTE [rdi + rcx], al
 	JNE 	_strcmp_end
