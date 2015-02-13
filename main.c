@@ -4,10 +4,22 @@
 
 # define S1 "abcdefghi"
 # define S2 "abcdefgh"
+# define SE ""
 
 size_t	strlen(const char *s);
 int	strcmp(char *s1, char *s2);
 char	*strcpy(char *dest, const char *src);
+
+int	test_strlen()
+{
+  printf("%s size : 9", S1);
+  assert(strlen(S1) == 9);
+  printf("%s size : 8", S2);
+  assert(strlen(S2) == 8);
+  printf("%s size : 0", SE);
+  assert(strlen(SE) == 0);
+  return (0);
+}
 
 int	test_strcmp()
 {
@@ -48,6 +60,8 @@ int	test_strcpy()
 
 int	main()
 {
+  printf("test STRLEN\n");
+  test_strlen();
   printf("test STRCMP\n");
   test_strcmp();
   printf("test STRCPY\n");

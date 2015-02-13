@@ -5,14 +5,15 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Fri Feb 13 14:52:00 2015 Arthur Poulet
+## Last update Fri Feb 13 15:56:35 2015 Arthur Poulet
 ##
 
 NAME		=	testing
 
 CSRCS		=	main.c
 
-ASRCS		=	strcmp.S \
+ASRCS		=	strlen.S \
+			strcmp.S \
 			strcpy.S
 
 AOBJS		=	$(ASRCS:.S=.o)
