@@ -22,3 +22,24 @@ _strcmp_end:
 	SUB	eax, edx
 	NEG	eax
 	RET
+
+	SECTION	.text
+	GLOBAL	strcmp
+
+	;; 3 arguments, RSI, RDI, RDX
+
+strncmp:
+	XOR	rcx, rcx
+	XOR	eax, eax
+
+_strncmp_loop:
+	CMP	rdx, 0
+	JE	_strcmp_end
+	DEC	rdx
+	MOV	al, BYTE [rsi + rcx]
+	CMP	BYTE [rdi + rcx], al
+	JNE 	_strcmp_end
+	CMP	al, BYTE 0
+	JE 	_strcmp_end
+	INC 	rcx
+	JMP 	_strncmp_loop
