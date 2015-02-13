@@ -1,37 +1,24 @@
 
+	SECTION	.text
 	GLOBAL	strcmp
 
 	;; 2 arguments, RSI, RDI
 strcmp:
-	PUSH 	rsi
-	PUSH 	rdi
+	XOR	rcx, rcx
+	XOR	eax, eax
 
 _strcmp_loop:
-	MOV	rax, [rsi]
-	SUB 	rax, [rdi]
-	JA 	_strcmp_loop_end_less
-	JB 	_strcmp_loop_end_more
-	CMP	rax, [rdi]
-	JZ 	_strcmp_loop_end_zero
-
-_strcmp_loop_next:
-	INC 	rsi
-	INC 	rdi
+	MOV	al, BYTE [rsi + rcx]
+	CMP	BYTE [rdi + rcx], al
+	JNE 	_strcmp_end
+	CMP	al, BYTE 0
+	JE 	_strcmp_end
+	INC 	rcx
 	JMP 	_strcmp_loop
 
-_strcmp_loop_end_zero:
-	MOV 	rax, 0
-	JMP	_strcmp_end
-
-_strcmp_loop_end_more:
-	MOV 	rax, 1
-	JMP 	_strcmp_end
-
-_strcmp_loop_end_less:
-	MOV 	rax, -1
-	JMP 	_strcmp_end
-
 _strcmp_end:
-	POP 	rdi
-	POP 	rsi
+	XOR	edx, edx
+	MOV	dl, BYTE [rdi + rcx]
+	SUB	edx, eax
+	MOV	eax, edx
 	RET

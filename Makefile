@@ -5,31 +5,32 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Fri Feb 13 13:49:34 2015 Arthur Poulet
+## Last update Fri Feb 13 14:52:00 2015 Arthur Poulet
 ##
 
-NAME		= testing
+NAME		=	testing
 
-CSRCS		= main.c
+CSRCS		=	main.c
 
-ASRCS		= strcmp.S
+ASRCS		=	strcmp.S \
+			strcpy.S
 
-AOBJS		= $(ASRCS:.S=.o)
-COBJS		= $(CSRCS:.c=.o)
-OBJS		= $(AOBJS)\
-		  $(COBJS)
+AOBJS		=	$(ASRCS:.S=.o)
+COBJS		=	$(CSRCS:.c=.o)
+OBJS		=	$(AOBJS)\
+		 	$(COBJS)
 
-NASM		= nasm
+NASM		=	nasm
 
-CC		= gcc
+CC		=	gcc
 
-NASMFLAGS	= -f elf64
+NASMFLAGS	=	-f elf64
 
-CFLAGS		= -c -Wall
+CFLAGS		=	-c -Wall -Wextra -Werror -g
 
-LFLAGS		= -Wall
+LFLAGS		=	-Wall
 
-RM		= rm -f
+RM		=	rm -f
 
 all:		$(NAME)
 
