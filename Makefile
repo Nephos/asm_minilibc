@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Fri Feb 13 15:56:35 2015 Arthur Poulet
+## Last update Fri Feb 13 16:17:42 2015 Arthur Poulet
 ##
 
 NAME		=	testing
@@ -14,7 +14,8 @@ CSRCS		=	main.c
 
 ASRCS		=	strlen.S \
 			strcmp.S \
-			strcpy.S
+			strcpy.S \
+			memset.S
 
 AOBJS		=	$(ASRCS:.S=.o)
 COBJS		=	$(CSRCS:.c=.o)
@@ -27,7 +28,7 @@ CC		=	gcc
 
 NASMFLAGS	=	-f elf64
 
-CFLAGS		=	-c -Wall -Wextra -Werror -g
+CFLAGS		=	-c -Wall -Wextra -Werror -g3
 
 LFLAGS		=	-Wall
 
