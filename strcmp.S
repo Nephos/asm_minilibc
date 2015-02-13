@@ -19,6 +19,6 @@ _strcmp_loop:
 _strcmp_end:
 	XOR	edx, edx
 	MOV	dl, BYTE [rdi + rcx]
-	SUB	edx, eax
-	MOV	eax, edx
+	SUB	eax, edx
+	NEG	eax
 	RET

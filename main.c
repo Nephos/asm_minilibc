@@ -16,7 +16,7 @@ int	test_strcmp()
   char	*str3 = S1;
 
   printf("%s\t > \t%s ? %i\n", str1, str2, strcmp(str1, str2));
-  /* assert(strcmp(str1, str2) > 0); */
+  assert(strcmp(str1, str2) > 0);
   printf("%s\t < \t%s ? %i\n", str2, str1, strcmp(str2, str1));
   assert(strcmp(str2, str1) < 0);
   printf("%s\t == \t%s ? %i\n", str1, str1, strcmp(str1, str1));
