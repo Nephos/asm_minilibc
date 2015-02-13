@@ -55,6 +55,11 @@ int	test_strncmp()
   assert(strncmp(str1, S1, strlen(S1)) == 0);
   printf("%s == %s, %i\n", str2, S2, strncmp(str1, S1, strlen(S1)));
   assert(strncmp(str1, S2, strlen(S1) - 1) == 0);
+  str2 = SE;
+  printf("%s\t == \t%s ? %i\n", str1, str2, strcmp(str1, str2));
+  assert(strcmp(str1, str2) > 0);
+  printf("%s\t\t == \t%s ? %i\n", str2, str1, strcmp(str2, str1));
+  assert(strcmp(str2, str1) < 0);
   return (0);
 }
 

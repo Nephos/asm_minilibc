@@ -30,6 +30,7 @@ _strcmp_end:
 strncmp:
 	XOR	rcx, rcx
 	XOR	eax, eax
+	DEC	rcx
 
 _strncmp_loop:
 	CMP	rdx, rcx
