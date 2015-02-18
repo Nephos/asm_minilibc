@@ -1,11 +1,18 @@
 
+	SECTION .text
+	GLOBAL memset
+
 	;; parameters RDI, RSI, RDX
 memset:
-	CMP	RDX, 0
-	JZ	_memset_end
-	MOV	[rdi + rdx], esi
-	INC	rdx
+	XOR	rcx, rcx
+
+_memset_loop:
+	CMP	rdx, rcx
+	JE	_memset_end
+	MOV	BYTE [rdi + rcx], sil
+	INC	rcx
+	JMP	_memset_loop
 
 _memset_end:
-	MOV	RAX, RDX
+	MOV	rax, rdi
 	RET

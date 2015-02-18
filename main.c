@@ -12,8 +12,8 @@ int	strncmp(const char *s1, const char *s2, size_t n);
 char	*strcpy(char *dest, const char *src);
 char	*strncpy(char *dest, const char *src, size_t n);
 void	*memset(void *s, int c, size_t n);
-char *strchr(const char *s, int c);
-
+char	*strchr(const char *s, int c);
+void	*memcpy(void *dest, const void *src, size_t n);
 
 int	test_strlen()
 {
@@ -96,7 +96,7 @@ int	test_strncpy()
 
 int	test_memset()
 {
-  char	*str = malloc(10);
+  char	*str = malloc(51);
 
   memset(str, 'a', 9);
   str[9] = 0;
@@ -122,12 +122,12 @@ int	main()
   test_strcmp();
   printf("test STRNCMP\n");
   test_strncmp();
+  printf("test MEMSET\n");
+  test_memset();
   printf("test STRCPY\n");
   test_strcpy();
   printf("test STRNCPY\n");
   test_strncpy();
-  printf("test MEMSET\n");
-  test_memset();
   printf("test STRCHR\n");
   test_strchr();
   printf("All tests passed with succes\n");
