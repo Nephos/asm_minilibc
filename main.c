@@ -12,6 +12,8 @@ int	strncmp(const char *s1, const char *s2, size_t n);
 char	*strcpy(char *dest, const char *src);
 char	*strncpy(char *dest, const char *src, size_t n);
 void	*memset(void *s, int c, size_t n);
+char *strchr(const char *s, int c);
+
 
 int	test_strlen()
 {
@@ -103,6 +105,15 @@ int	test_memset()
   return (0);
 }
 
+int	test_strchr()
+{
+  char	*str = S1;
+  char	c4 = str[4];
+
+  assert(strchr(str, c4) == str + 4);
+  return (0);
+}
+
 int	main()
 {
   printf("test STRLEN\n");
@@ -117,6 +128,8 @@ int	main()
   test_strncpy();
   printf("test MEMSET\n");
   test_memset();
+  printf("test STRCHR\n");
+  test_strchr();
   printf("All tests passed with succes\n");
   return (0);
 }

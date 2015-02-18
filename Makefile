@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Fri Feb 13 16:17:42 2015 Arthur Poulet
+## Last update Wed Feb 18 15:02:32 2015 Arthur Poulet
 ##
 
 NAME		=	testing
@@ -15,7 +15,8 @@ CSRCS		=	main.c
 ASRCS		=	strlen.S \
 			strcmp.S \
 			strcpy.S \
-			memset.S
+			memset.S \
+			strchr.S
 
 AOBJS		=	$(ASRCS:.S=.o)
 COBJS		=	$(CSRCS:.c=.o)
