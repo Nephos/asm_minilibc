@@ -118,8 +118,6 @@ int	test_strchr()
   return (0);
 }
 
-# include <string.h>
-
 int	test_strstr()
 {
   char	*str1 = S1;
