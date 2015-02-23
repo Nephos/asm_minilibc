@@ -7,13 +7,14 @@
 # define SE ""
 
 size_t	strlen(const char *s);
-int	strcmp(char *s1, char *s2);
+int	strcmp(const char *s1, const char *s2);
 int	strncmp(const char *s1, const char *s2, size_t n);
 char	*strcpy(char *dest, const char *src);
 char	*strncpy(char *dest, const char *src, size_t n);
 void	*memset(void *s, int c, size_t n);
 char	*strchr(const char *s, int c);
 void	*memcpy(void *dest, const void *src, size_t n);
+char	*strstr(const char *haystack, const char *needle);
 
 int	test_strlen()
 {
@@ -56,13 +57,15 @@ int	test_strncmp()
 
   printf("%s == %s, %i\n", str1, S1, strncmp(str1, S1, strlen(S1)));
   assert(strncmp(str1, S1, strlen(S1)) == 0);
-  printf("%s == %s, %i\n", str2, S2, strncmp(str1, S1, strlen(S1)));
-  assert(strncmp(str1, S2, strlen(S1) - 1) == 0);
-  str2 = SE;
-  printf("%s\t == \t%s ? %i\n", str1, str2, strcmp(str1, str2));
-  assert(strcmp(str1, str2) > 0);
-  printf("%s\t\t == \t%s ? %i\n", str2, str1, strcmp(str2, str1));
-  assert(strcmp(str2, str1) < 0);
+  printf("%s == %s, %i\n", str2, S2, strncmp(str2, S2, strlen(S2)));
+  assert(strncmp(str2, S2, strlen(S2)) == 0);
+
+  printf("%s\t != \t%s ? %i\n", str1, str2,
+	 strncmp(str1, str2, strlen(str1)));
+  assert(strncmp(str1, str2, strlen(str1)) != 0);
+  printf("%s\t\t == \t%s ? %i\n", str2, str1,
+	 strncmp(str2, str1, strlen(str2)));
+  assert(strncmp(str2, str1, strlen(str2)) == 0);
   return (0);
 }
 
@@ -110,7 +113,25 @@ int	test_strchr()
   char	*str = S1;
   char	c4 = str[4];
 
+  printf("%p\n", str);
   assert(strchr(str, c4) == str + 4);
+  return (0);
+}
+
+# include <string.h>
+
+int	test_strstr()
+{
+  char	*str1 = S1;
+  char	*str2 = S1 + 2;
+
+  printf("str1 : %p\n", str1);
+  printf("str2 : %p\n", str2);
+  printf("%p == %p\n", strstr(str1, str2), str2);
+  /* printf("%p == %p\n", strstr(str1, str2), str1 + 2); // Awsome */
+  assert(strstr(str1, str2) == str1 + 2);
+  str2 += 2;
+  assert(strstr(str1, str2) == str1 + 4);
   return (0);
 }
 
@@ -130,6 +151,8 @@ int	main()
   test_strncpy();
   printf("test STRCHR\n");
   test_strchr();
+  printf("test STRSTR\n");
+  test_strstr();
   printf("All tests passed with succes\n");
   return (0);
 }

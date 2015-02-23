@@ -3,7 +3,7 @@
 	GLOBAL	strcpy
 	GLOBAL	strncpy
 
- 	;; 2 arguments, RSI, RDI
+ 	;; 2 arguments, RDI, RSI
 strcpy:
 	XOR	rcx, rcx
 
@@ -20,7 +20,7 @@ _strcpy_end:
 	MOV	rax, rdi
 	RET
 
- 	;; 4 arguments, RSI, RDI, RDX
+ 	;; 4 arguments, RDI, RSI, RDX
 strncpy:
 	XOR	rcx, rcx
 	DEC	rcx

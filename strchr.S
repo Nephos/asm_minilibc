@@ -1,9 +1,8 @@
 
 	SECTION	.text
-
 	GLOBAL	strchr
 
-	;; 2 arguments, RSI, RDI
+	;; 2 arguments, RDI, RSI
 strchr:
 	XOR	rcx, rcx
 

@@ -4,7 +4,7 @@
 	GLOBAL	strcmp
 	GLOBAL	strncmp
 
-	;; 2 arguments, RSI, RDI
+	;; 2 arguments, RDI, RSI
 strcmp:
 	XOR	rcx, rcx
 	XOR	eax, eax
@@ -25,20 +25,29 @@ _strcmp_end:
 	NEG	eax
 	RET
 
-	;; 3 arguments, RSI, RDI, RDX
+	;; 3 arguments, RDI, RSI, RDX
 
 strncmp:
 	XOR	rcx, rcx
-	XOR	eax, eax
-	DEC	rcx
+	XOR	rax, rax
+	XOR	rbx, rbx
 
 _strncmp_loop:
 	CMP	rdx, rcx
-	JE	_strcmp_end
-	MOV	al, BYTE [rsi + rcx]
-	CMP	BYTE [rdi + rcx], al
-	JNE 	_strcmp_end
+	JE	_strncmp_end_zero
+	MOV	al, BYTE [rdi + rcx]
+	MOV	bl, BYTE [rsi + rcx]
+	CMP	al, bl
+	JNE 	_strncmp_end
 	CMP	al, BYTE 0
-	JE 	_strcmp_end
+	JE 	_strncmp_end
 	INC 	rcx
 	JMP 	_strncmp_loop
+
+_strncmp_end:
+	SUB	eax, ebx
+	RET
+
+_strncmp_end_zero:
+	XOR	rax, rax
+	RET
