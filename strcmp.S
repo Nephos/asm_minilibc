@@ -6,6 +6,7 @@
 
 	;; 2 arguments, RDI, RSI
 strcmp:
+	PUSH	rbx
 	XOR	rcx, rcx
 	XOR	eax, eax
 
@@ -23,11 +24,13 @@ _strcmp_end:
 	MOV	dl, BYTE [rdi + rcx]
 	SUB	eax, edx
 	NEG	eax
+	POP	rbx
 	RET
 
 	;; 3 arguments, RDI, RSI, RDX
 
 strncmp:
+	PUSH	rbx
 	XOR	rcx, rcx
 	XOR	rax, rax
 	XOR	rbx, rbx
@@ -46,8 +49,10 @@ _strncmp_loop:
 
 _strncmp_end:
 	SUB	eax, ebx
+	POP	rbx
 	RET
 
 _strncmp_end_zero:
 	XOR	rax, rax
+	POP	rbx
 	RET

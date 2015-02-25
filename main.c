@@ -121,12 +121,12 @@ int	test_strchr()
 int	test_strstr()
 {
   char	*str1 = S1;
-  char	*str2 = S1 + 2;
+  char	*str2 = str1 + 2;
 
   printf("str1 : %p\n", str1);
   printf("str2 : %p\n", str2);
   printf("%p == %p\n", strstr(str1, str2), str2);
-  /* printf("%p == %p\n", strstr(str1, str2), str1 + 2); // Awsome */
+  printf("%p == %p\n", strstr(str1, str2), str1 + 2); // Awsome
   assert(strstr(str1, str2) == str1 + 2);
   str2 += 2;
   assert(strstr(str1, str2) == str1 + 4);
