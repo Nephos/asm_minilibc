@@ -12,8 +12,8 @@ int	strncmp(const char *s1, const char *s2, size_t n);
 char	*strcpy(char *dest, const char *src);
 char	*strncpy(char *dest, const char *src, size_t n);
 void	*memset(void *s, int c, size_t n);
-char	*strchr(const char *s, int c);
 void	*memcpy(void *dest, const void *src, size_t n);
+char	*strchr(const char *s, int c);
 char	*strstr(const char *haystack, const char *needle);
 
 int	test_strlen()
@@ -108,6 +108,17 @@ int	test_memset()
   return (0);
 }
 
+int	test_memcpy()
+{
+  char	*str = malloc(51);
+
+  printf("Copy %lu characters (%s)\n", strlen(S1), S1);
+  memcpy(str, S1, strlen(S1));
+  printf("%s == %s\n", str, S1);
+  assert(strcmp(S1, str) == 0);
+  return (0);
+}
+
 int	test_strchr()
 {
   char	*str = S1;
@@ -143,6 +154,8 @@ int	main()
   test_strncmp();
   printf("test MEMSET\n");
   test_memset();
+  printf("test MEMCPY\n");
+  test_memcpy();
   printf("test STRCPY\n");
   test_strcpy();
   printf("test STRNCPY\n");

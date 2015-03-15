@@ -5,25 +5,27 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Mon Feb 23 16:15:17 2015 Arthur Poulet
+## Last update Sun Mar 15 00:45:06 2015 Arthur Poulet
 ##
 
-NAME		=	testing
+NAME		=	libasm.so
 
-CSRCS		=	main.c
+NAMETEST	=	testing
 
-ASRCS		=	strlen.S \
+SRCSTEST	=	main.c
+
+SRCS		=	strlen.S \
 			strcmp.S \
 			strcpy.S \
 			memset.S \
 			memcpy.S \
 			strchr.S \
-			strstr.S
+			strstr.S \
+			strdup.S
 
-AOBJS		=	$(ASRCS:.S=.o)
-COBJS		=	$(CSRCS:.c=.o)
-OBJS		=	$(AOBJS)\
-		 	$(COBJS)
+OBJS		=	$(SRCS:.S=.o)
+
+OBJSTEST	=	$(SRCSTEST:.c=.o)
 
 NASM		=	nasm
 
@@ -31,9 +33,7 @@ CC		=	gcc
 
 NASMFLAGS	=	-f elf64
 
-CFLAGS		=	-c -Wall -Wextra -Werror -g3
-
-LFLAGS		=	-Wall
+CFLAGS		=	-c -Wall -Wextra -Werror -g
 
 RM		=	rm -f
 
@@ -41,7 +41,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 		@echo -e "linking of $@"
-		$(CC) -o $(NAME) $(OBJS) $(LFLAGS)
+		$(CC) -o $(NAME) $(OBJS) -shared -fPIC
 		@echo -e "$(NAME) Compiled"
 
 %.o:		%.S
@@ -52,13 +52,18 @@ $(NAME):	$(OBJS)
 
 clean:
 		$(RM) $(OBJS)
+		$(RM) $(OBJSTEST)
 
 fclean:		clean
 		$(RM) $(NAME)
+		$(RM) $(NAMETEST)
 
 re:		fclean all
 
-test:		all
-		./$(NAME)
+test:		all $(NAMETEST)
+		LD_PRELOAD="./$(NAME)" ./$(NAMETEST)
+
+$(NAMETEST):	$(OBJSTEST)
+		$(CC) -o $(NAMETEST) $(OBJSTEST)
 
 .PHONY:		all clean fclean re test

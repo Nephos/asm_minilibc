@@ -9,14 +9,14 @@
 strstr:
 	PUSH	rdi
 	MOV	rdi, rsi
-	CALL	strlen
+	CALL	strlen WRT ..plt
 	MOV	rdx, rax
 	MOV	rsi, rdi
 	POP	rdi
 
 _strstr_loop:
 	PUSH	rdx
-	CALL	strncmp
+	CALL	strncmp WRT ..plt
 	POP	rdx
 	CMP	rax, 0
 	JE	_strstr_end
