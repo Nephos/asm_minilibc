@@ -2,7 +2,7 @@
 	SECTION	.text
 
 	GLOBAL	strcmp
-	GLOBAL	strncmp
+	;; GLOBAL	strncmp
 
 	;; 2 arguments, RDI, RSI
 strcmp:

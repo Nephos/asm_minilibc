@@ -18,12 +18,20 @@ char	*strstr(const char *haystack, const char *needle);
 
 int	test_strlen()
 {
-  printf("%s size : 9\n", S1);
-  assert(strlen(S1) == 9);
-  printf("%s size : 8\n", S2);
-  assert(strlen(S2) == 8);
-  printf("%s size : 0\n", SE);
-  assert(strlen(SE) == 0);
+  char	*s1 = S1;
+  char	*s2 = S2;
+  char	*se = SE;
+  /* char	*str = NULL; */
+  /* int	i = strlen(str); */
+
+  /* printf("%s size : %i\n", str, i); */
+  /* assert(i == 0); */
+  printf("%s size : 9 = %lu\n", s1, strlen(s1));
+  assert(strlen(s1) == 9);
+  printf("%s size : 8 = %lu\n", s2, strlen(s2));
+  assert(strlen(s2) == 8);
+  printf("%s size : 0 = %lu\n", se, strlen(se));
+  assert(strlen(se) == 0);
   return (0);
 }
 
@@ -54,18 +62,26 @@ int	test_strncmp()
 {
   char	*str1 = S1;
   char	*str2 = S2;
+  size_t	len1 = strlen(str1);
+  size_t	len2 = strlen(str2);
 
-  printf("%s == %s, %i\n", str1, S1, strncmp(str1, S1, strlen(S1)));
-  assert(strncmp(str1, S1, strlen(S1)) == 0);
-  printf("%s == %s, %i\n", str2, S2, strncmp(str2, S2, strlen(S2)));
-  assert(strncmp(str2, S2, strlen(S2)) == 0);
+  printf("%s == %s, %i\n", str1, S1, strncmp(str1, S1, len1));
+  assert(strncmp(str1, S1, len1) == 0);
+  printf("%s == %s, %i\n", str2, S2, strncmp(str2, S2, len2));
+  assert(strncmp(str2, S2, len2) == 0);
 
   printf("%s\t != \t%s ? %i\n", str1, str2,
-	 strncmp(str1, str2, strlen(str1)));
-  assert(strncmp(str1, str2, strlen(str1)) != 0);
+	 strncmp(str1, str2, len1));
+  assert(strncmp(str1, str2, len1) != 0);
+
   printf("%s\t\t == \t%s ? %i\n", str2, str1,
-	 strncmp(str2, str1, strlen(str2)));
-  assert(strncmp(str2, str1, strlen(str2)) == 0);
+	 strncmp(str2, str1, len2));
+  printf("strings : %s %s\n", str2, str1);
+  printf("sizes : %lu, %lu\n", len2, len1);
+  printf("size : %lu\n", len1);
+  printf("size : %lu\n", len2);
+  printf("\n");
+  assert(strncmp(str2, str1, len2) == 0);
   return (0);
 }
 

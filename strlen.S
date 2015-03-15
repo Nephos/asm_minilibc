@@ -1,12 +1,14 @@
-
-	;; parameter RSI
-
+	;; parameter RDI
+	SECTION	.text
+	GLOBAL	strlen
 strlen:
-	XOR	rcx, rcx
 	XOR	rax, rax
-	CMP	[rsi + rax], rcx
-	JZ	_strlen_end
+
+_strlen_loop:
+	CMP	[rdi + rax], byte 0
+	JE	_strlen_end
 	INC	rax
+	JMP	_strlen_loop
 
 _strlen_end:
 	RET
