@@ -1,15 +1,10 @@
-
-	SECTION	.text
-
-	GLOBAL	strcmp
-	;; GLOBAL	strncmp
-
 	;; 2 arguments, RDI, RSI
+	SECTION	.text
+	GLOBAL	strcmp
 strcmp:
 	PUSH	rbx
 	XOR	rcx, rcx
 	XOR	eax, eax
-
 _strcmp_loop:
 	MOV	al, BYTE [rsi + rcx]
 	CMP	BYTE [rdi + rcx], al
@@ -18,7 +13,6 @@ _strcmp_loop:
 	JE 	_strcmp_end
 	INC 	rcx
 	JMP 	_strcmp_loop
-
 _strcmp_end:
 	XOR	edx, edx
 	MOV	dl, BYTE [rdi + rcx]
@@ -28,13 +22,13 @@ _strcmp_end:
 	RET
 
 	;; 3 arguments, RDI, RSI, RDX
-
+	SECTION	.text
+	GLOBAL	strncmp
 strncmp:
 	PUSH	rbx
 	XOR	rcx, rcx
 	XOR	rax, rax
 	XOR	rbx, rbx
-
 _strncmp_loop:
 	CMP	rdx, rcx
 	JE	_strncmp_end_zero
@@ -46,12 +40,10 @@ _strncmp_loop:
 	JE 	_strncmp_end
 	INC 	rcx
 	JMP 	_strncmp_loop
-
 _strncmp_end:
 	SUB	eax, ebx
 	POP	rbx
 	RET
-
 _strncmp_end_zero:
 	XOR	rax, rax
 	POP	rbx

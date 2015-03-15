@@ -3,7 +3,6 @@
 	GLOBAL memcpy
 memcpy:
 	PUSH	rdi
-
 _memcpy_loop:
 	CMP	rdx, 0
 	JE	_memcpy_end
@@ -13,7 +12,6 @@ _memcpy_loop:
 	INC	rdi
 	INC	rsi
 	JMP	_memcpy_loop
-
 _memcpy_end:
 	POP	rax
 	RET
@@ -50,7 +48,6 @@ memmove:
 	;; end
 	POP	rax
 	JMP	_memmove_end
-
 _memmove_malloc_failed:
 	XOR	rax, rax
 _memmove_end:
