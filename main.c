@@ -239,6 +239,21 @@ int	test_strpbrk()
   return (0);
 }
 
+int	test_strcspn()
+{
+  char	*s = "abcdefgh";
+
+  printf("%s[!=e] = 4 == %lu\n", s, strcspn(s, "e"));
+  assert(strcspn(s, "e") == 4);
+  printf("%s[!=efg] = 4 == %lu\n", s, strcspn(s, "feg"));
+  assert(strcspn(s, "feg") == 4);
+  printf("%s[!=abc] = 0 == %lu\n", s, strcspn(s, "abc"));
+  assert(strcspn(s, "abc") == 0);
+  printf("%s[!=x] = 8 == %lu\n", s, strcspn(s, "x"));
+  assert(strcspn(s, "x") == 8);
+  return 0;
+}
+
 int	main()
 {
   printf("\ntest STRLEN\n");
@@ -282,6 +297,9 @@ int	main()
 
   printf("\ntest STRPBRK\n");
   test_strpbrk();
+
+  printf("\ntest STRCSPN\n");
+  test_strcspn();
 
   printf("All tests passed with succes\n");
   return (0);

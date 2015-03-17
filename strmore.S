@@ -44,3 +44,22 @@ _strpbrk_final:
 ;; 	XOR	rax, rax
 _strpbrk_end:
 	RET
+
+	;; 2 arguments, RDI, RSI
+	SECTION	.text
+	GLOBAL	strcspn
+	EXTERN	index
+strcspn:
+	PUSH	rdi
+	PUSH	rsi
+	CALL	strpbrk
+	POP	rsi
+	POP	rdi
+	CMP	rax, 0
+	JE	_strcspn_end_zero
+	SUB	rax, rdi
+	JMP	_strcspn_end
+_strcspn_end_zero:
+	XOR	rax, rax
+_strcspn_end:
+	RET
