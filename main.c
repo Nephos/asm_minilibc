@@ -15,6 +15,8 @@ char	*strncpy(char *dest, const char *src, size_t n);
 void	*memset(void *s, int c, size_t n);
 void	*memcpy(void *dest, const void *src, size_t n);
 void	*memmove(void *dest, const void *src, size_t n);
+char	*index(const char *s, int c);
+char	*rindex(const char *s, int c);
 char	*strchr(const char *s, int c);
 char	*strstr(const char *haystack, const char *needle);
 
@@ -174,6 +176,32 @@ int	test_memmove()
   return (0);
 }
 
+int	test_index()
+{
+  char	*str = "bonjouro";
+  char	c = 'o';
+  char	n = 'X';
+
+  printf("%s [%c] = %s\n", str, c, index(str, c));
+  assert(index(str, c) == str + 1);
+  printf("%s [%c] = %s\n", str, n, index(str, n));
+  assert(index(str, n) == 0);
+  return (0);
+}
+
+int	test_rindex()
+{
+  char	*str = "bonjouro";
+  char	c = 'o';
+  char	n = 'X';
+
+  printf("%s [%c] = %s\n", str, c, rindex(str, c));
+  assert(rindex(str, c) == str + 7);
+  printf("%s [%c] = %s\n", str, n, rindex(str, n));
+  assert(index(str, n) == 0);
+  return (0);
+}
+
 int	test_strchr()
 {
   char	*str = S1;
@@ -219,14 +247,20 @@ int	main()
   printf("\ntest MEMCPY\n");
   test_memcpy();
 
-  printf("\ntest MEMMOVE\n");
-  test_memmove();
+  /* printf("\ntest MEMMOVE\n"); */
+  /* test_memmove(); */
 
   printf("\ntest STRCPY\n");
   test_strcpy();
 
   printf("\ntest STRNCPY\n");
   test_strncpy();
+
+  printf("\ntest INDEX\n");
+  test_index();
+
+  printf("\ntest RINDEX\n");
+  test_rindex();
 
   printf("\ntest STRCHR\n");
   test_strchr();
