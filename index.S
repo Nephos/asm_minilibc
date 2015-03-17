@@ -8,7 +8,7 @@ index:
 _index_loop:
 	CMP	sil, BYTE [rdi + rcx]
 	JE	_index_end_found
-	CMP	[rdi + rcx], DWORD 0
+	CMP	[rdi + rcx], BYTE 0
 	JE	_index_end_notfound
 	INC	rcx
 	JMP	_index_loop
@@ -33,7 +33,7 @@ _rindex_loop:
 _rindex_save:
 	MOV	rdx, rcx
 _rindex_next:
-	CMP	[rdi + rcx], DWORD 0
+	CMP	[rdi + rcx], BYTE 0
 	JE	_rindex_final
 	INC	rcx
 	JMP	_rindex_loop

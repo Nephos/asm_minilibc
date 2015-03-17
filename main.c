@@ -183,11 +183,14 @@ int	test_index()
   char	*str = "bonjouro";
   char	c = 'o';
   char	n = 'X';
+  char	m = 'a';
 
   printf("%s [%c] = %s\n", str, c, index(str, c));
   assert(index(str, c) == str + 1);
   printf("%s [%c] = %s\n", str, n, index(str, n));
   assert(index(str, n) == 0);
+  printf("%s [%c] = %s\n", str, m, index(str, m));
+  assert(index(str, m) == 0);
   return (0);
 }
 
@@ -226,6 +229,8 @@ int	test_strstr()
   assert(strstr(str1, str2) == str1 + 2);
   str2 += 2;
   assert(strstr(str1, str2) == str1 + 4);
+  printf("%p == %p\n", strstr(str1, "zzz"), NULL); // Awsome
+  assert(strstr(str1, "zz") == NULL);
   return (0);
 }
 
@@ -233,9 +238,13 @@ int	test_strpbrk()
 {
   char	*s1 = "bonjour";
   char	*s2 = "jo";
+  char	*s3 = "gg";
 
   printf("%s[%s] = %s ? %s\n", s1, s2, "onjour", strpbrk(s1, s2));
   assert(strpbrk(s1, s2) == s1 + 1);
+  printf("fail\n");
+  printf("%s[%s] = %s ? %s\n", s1, s3, "NULL", strpbrk(s1, s3));
+  assert(strpbrk(s1, s3) == NULL);
   return (0);
 }
 
