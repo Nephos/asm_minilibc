@@ -6,7 +6,10 @@ strcmp OK
 memmove EN COURS
 strncmp OK
 strcasecmp OK
-rindex NOP
+rindex OK
 strstr OK
 strpbrk NOP
-strcspn NIO
+strcspn NOP
+
+strdup OK
+index OK (= strchr)
