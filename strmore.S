@@ -47,6 +47,7 @@ _strpbrk_end:
 	SECTION	.text
 	GLOBAL	strcspn
 	EXTERN	index
+	EXTERN	strlen
 strcspn:
 	PUSH	rdi
 	PUSH	rsi
@@ -54,10 +55,10 @@ strcspn:
 	POP	rsi
 	POP	rdi
 	CMP	rax, 0
-	JE	_strcspn_end_zero
+	JE	_strcspn_end_none
 	SUB	rax, rdi
 	JMP	_strcspn_end
-_strcspn_end_zero:
-	XOR	rax, rax
+_strcspn_end_none:
+	CALL	strlen WRT ..plt
 _strcspn_end:
 	RET
