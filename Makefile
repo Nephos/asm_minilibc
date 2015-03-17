@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Sun Mar 15 00:45:06 2015 Arthur Poulet
+## Last update Tue Mar 17 16:10:26 2015 Arthur Poulet
 ##
 
 NAME		=	libasm.so
@@ -19,7 +19,7 @@ SRCS		=	strlen.S \
 			strcpy.S \
 			memset.S \
 			memcpy.S \
-			strchr.S \
+			index.S \
 			strstr.S \
 			strdup.S
 
