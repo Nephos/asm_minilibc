@@ -8,7 +8,7 @@ strncmp OK
 strcasecmp OK
 rindex OK
 strstr OK
-strpbrk NOP
+strpbrk OK
 strcspn NOP
 
 strdup OK

@@ -19,6 +19,8 @@ char	*index(const char *s, int c);
 char	*rindex(const char *s, int c);
 char	*strchr(const char *s, int c);
 char	*strstr(const char *haystack, const char *needle);
+char	*strpbrk(const char *s, const char *accept);
+size_t	strcspn(const char *s, const char *reject);
 
 int	test_strlen()
 {
@@ -227,6 +229,16 @@ int	test_strstr()
   return (0);
 }
 
+int	test_strpbrk()
+{
+  char	*s1 = "bonjour";
+  char	*s2 = "jo";
+
+  printf("%s[%s] = %s ? %s\n", s1, s2, "onjour", strpbrk(s1, s2));
+  assert(strpbrk(s1, s2) == s1 + 1);
+  return (0);
+}
+
 int	main()
 {
   printf("\ntest STRLEN\n");
@@ -267,6 +279,9 @@ int	main()
 
   printf("\ntest STRSTR\n");
   test_strstr();
+
+  printf("\ntest STRPBRK\n");
+  test_strpbrk();
 
   printf("All tests passed with succes\n");
   return (0);
