@@ -22,33 +22,82 @@ _memcpy_end:
 	EXTERN malloc
 	EXTERN free
 memmove:
-	PUSH	rdi
-	PUSH	rsi
+	PUSH	rdi		; dest
+	PUSH	rsi		; dest, src
 	PUSH	rdx		; dest, src, size
-	;; alloc tmp
-	MOV	rax, rdx
+_memmove_alloc_pre:
+	MOV	rdi, rdx
+_memmove_alloc:
 	CALL	malloc WRT ..plt
-	;; copy source to tmp
+_memmove_save_pre:
+	POP	rdx		; dest, src
+	POP	rsi		; dest
+	PUSH	rdx		; dest, size
+	PUSH	rax		; dest, size, alloc
 	MOV	rdi, rax
-	POP	rdx
-	POP	rsi
-	PUSH	rdx
-	PUSH 	rax		; dest, size, tmp
+_memmove_save:
 	CALL	memcpy
-	;; copy tmp to dest
-	POP	rsi
-	POP	rdx
-	POP	rdi
-	PUSH	rdi		; tmp
+_memmove_save_check:
+	CMP	rax, 0
+	JE	_memmove_save_check_failed
+_memmove_cpy_pre:
+	POP	rsi		; dest, size
+	POP	rdx		; dest
+	POP	rdi		; <empty>
+	PUSH	rdi		; dest
+	PUSH	rsi		; dest, alloc
+	;; PUSH	rdx		; dest, alloc, size
+_memmove_cpy:
 	CALL	memcpy
-	;; free
-	POP	rdi
-	PUSH	rax		; dest
+_memmove_free_pre:
+	;; POP	rdx		; dest, alloc
+	POP	rdi		; dest
+_memmove_free:
 	CALL	free WRT ..plt
-	;; end
-	POP	rax
-	JMP	_memmove_end
-_memmove_malloc_failed:
-	XOR	rax, rax
+_memmove_final:
+	POP	rax		; <empty>
 _memmove_end:
 	RET
+_memmove_save_check_failed:
+	POP	rax
+	POP	rax
+	POP	rax
+	XOR	rax, rax
+	JMP	_memmove_end
+
+;; memmove:
+;; 	PUSH	rdi
+;; 	PUSH	rsi
+;; 	PUSH	rdx		; dest, src, size
+;; _memmove_alloc:
+;; 	;; alloc tmp
+;; 	MOV	rdi, rdx
+;; 	CALL	malloc WRT ..plt
+;; _memmove_save:
+;; 	;; copy source to tmp
+;; 	MOV	rdi, rax
+;; 	POP	rdx
+;; 	POP	rsi
+;; 	PUSH	rdx
+;; 	PUSH 	rax		; dest, size, tmp
+;; 	CALL	memcpy
+;; _memmove_copy:
+;; 	;; copy tmp to dest
+;; 	POP	rsi
+;; 	POP	rdx
+;; 	POP	rdi
+;; 	PUSH	rdi		; tmp
+;; 	CALL	memcpy
+;; _memmove_free:
+;; 	;; free
+;; 	POP	rdi
+;; 	PUSH	rax		; dest
+;; 	CALL	free WRT ..plt
+;; 	;; finalisation
+;; _memmove_final:
+;; 	POP	rax
+;; 	JMP	_memmove_end
+;; _memmove_malloc_failed:
+;; 	XOR	rax, rax
+;; _memmove_end:
+;; 	RET

@@ -8,11 +8,13 @@
 
 size_t	strlen(const char *s);
 int	strcmp(const char *s1, const char *s2);
+int	strcasecmp(const char *s1, const char *s2);
 int	strncmp(const char *s1, const char *s2, size_t n);
 char	*strcpy(char *dest, const char *src);
 char	*strncpy(char *dest, const char *src, size_t n);
 void	*memset(void *s, int c, size_t n);
 void	*memcpy(void *dest, const void *src, size_t n);
+void	*memmove(void *dest, const void *src, size_t n);
 char	*strchr(const char *s, int c);
 char	*strstr(const char *haystack, const char *needle);
 
@@ -55,6 +57,29 @@ int	test_strcmp()
   assert(strcmp(str2, str2) == 0);
   printf("%s\t == \t%s ? %i\n", str1, str3, strcmp(str3, str1));
   assert(strcmp(str2, str2) == 0);
+  return (0);
+}
+
+int	test_strcasecmp()
+{
+  char	*s1 = "aaa";
+  char	*s2 = "bbb";
+  char	*s3 = "AAA";
+  char	*s4 = "BBB";
+  char	*s5 = "aAb";
+
+  printf("%s == %s = %i\n", s1, s1, strcasecmp(s1, s1));
+  assert(strcasecmp(s1, s1) == 0);
+  printf("%s != %s = %i\n", s1, s2, strcasecmp(s1, s2));
+  assert(strcasecmp(s1, s2) != 0);
+  printf("%s == %s = %i\n", s1, s3, strcasecmp(s1, s3));
+  assert(strcasecmp(s1, s3) == 0);
+  printf("%s == %s = %i\n", s2, s4, strcasecmp(s2, s4));
+  assert(strcasecmp(s2, s4) == 0);
+  printf("%s < %s  = %i\n", s1, s5, strcasecmp(s1, s5));
+  assert(strcasecmp(s1, s5) < 0);
+  printf("%s > %s  = %i\n", s5, s1, strcasecmp(s5, s1));
+  assert(strcasecmp(s5, s1) > 0);
   return (0);
 }
 
@@ -135,6 +160,20 @@ int	test_memcpy()
   return (0);
 }
 
+#define A "aaabb"
+#define B "aabbb"
+int	test_memmove()
+{
+  char	*str = malloc(6);
+
+  memcpy(str, A, 6);
+  printf("%s %s %i\n", str + 1, str + 2, 2);
+  memmove(str + 1, str + 2, 2);
+  printf("%s == %s\n", str, B);
+  assert(strcmp(str, B) == 0);
+  return (0);
+}
+
 int	test_strchr()
 {
   char	*str = S1;
@@ -162,24 +201,39 @@ int	test_strstr()
 
 int	main()
 {
-  printf("test STRLEN\n");
+  printf("\ntest STRLEN\n");
   test_strlen();
-  printf("test STRCMP\n");
+
+  printf("\ntest STRCMP\n");
   test_strcmp();
-  printf("test STRNCMP\n");
+
+  printf("\ntest STRCASECMP\n");
+  test_strcasecmp();
+
+  printf("\ntest STRNCMP\n");
   test_strncmp();
-  printf("test MEMSET\n");
+
+  printf("\ntest MEMSET\n");
   test_memset();
-  printf("test MEMCPY\n");
+
+  printf("\ntest MEMCPY\n");
   test_memcpy();
-  printf("test STRCPY\n");
+
+  printf("\ntest MEMMOVE\n");
+  test_memmove();
+
+  printf("\ntest STRCPY\n");
   test_strcpy();
-  printf("test STRNCPY\n");
+
+  printf("\ntest STRNCPY\n");
   test_strncpy();
-  printf("test STRCHR\n");
+
+  printf("\ntest STRCHR\n");
   test_strchr();
-  printf("test STRSTR\n");
+
+  printf("\ntest STRSTR\n");
   test_strstr();
+
   printf("All tests passed with succes\n");
   return (0);
 }
