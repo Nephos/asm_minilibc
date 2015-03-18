@@ -4,7 +4,6 @@
 	EXTERN strlen
 	EXTERN malloc
 	EXTERN memcpy
-
 strdup:
 	PUSH	rdi		; rdi
 	CALL	strlen WRT ..plt
