@@ -4,17 +4,24 @@
 	EXTERN strlen
 	EXTERN malloc
 	EXTERN memcpy
+
 strdup:
-	PUSH	rdi
+	PUSH	rdi		; rdi
 	CALL	strlen WRT ..plt
-	INC	rax
-	PUSH	rax
-	MOV	rax, rdi
+	INC	rax		; size with \0
+	PUSH	rax		; rdi, rax
+	MOV	rdi, rax
 	CALL	malloc WRT ..plt
-	MOV	rdi, rax	; rdi = ptr to new str
-	POP	rdx		; rax = len
-	POP	rsi		; rsi = ptr to old str
+	CMP	rax, 0
+	JE	_strdup_end_failure
+	MOV	rdi, rax	; rdi = allocated memory
+	POP	rdx		; size with \0
+	POP	rsi		; rsi is the original argument 1
 	CALL	memcpy WRT ..plt
 _strdup_end:
-	MOV	rax, rdi
+	RET
+_strdup_end_failure:
+	POP	rax
+	POP	rax
+	XOR	rax, rax
 	RET

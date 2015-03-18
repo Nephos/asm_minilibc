@@ -6,8 +6,8 @@ memcpy:
 _memcpy_loop:
 	CMP	rdx, 0
 	JE	_memcpy_end
-	MOV	ecx, [rsi]
-	MOV	[rdi], ecx
+	MOV	cl, BYTE [rsi]
+	MOV	BYTE [rdi], cl
 	DEC	rdx
 	INC	rdi
 	INC	rsi

@@ -1,15 +1,15 @@
 strlen OK
 strchr OK
 memset OK
-memcpy OK
+memcpy BUGGY
 strcmp OK
-memmove EN COURS
+memmove OK
 strncmp OK
 strcasecmp OK
 rindex OK
 strstr OK
-strpbrk OK
-strcspn OK
+strpbrk OK ?
+strcspn OK ?
 
 strdup OK
-index OK (= strchr)
+index OK
