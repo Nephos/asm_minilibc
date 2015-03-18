@@ -3,15 +3,20 @@
 	GLOBAL	strcpy
 strcpy:
 	XOR	rcx, rcx
+	CMP	rsi, 0
+	JE	_strcpy_final
+	CMP	rdi, 0
+	JE	_strcpy_final
 _strcpy_loop:
-	CMP	byte [rsi + rcx], BYTE 0
-	JE	_strcpy_end
+	CMP	BYTE [rsi + rcx], BYTE 0
+	JE	_strcpy_final
 	MOV	al, BYTE [rsi + rcx]
 	MOV	BYTE [rdi + rcx], al
 	INC	rcx
 	JMP	_strcpy_loop
-_strcpy_end:
+_strcpy_final:
 	MOV	[rdi + rcx], BYTE 0
+_strcpy_end:
 	MOV	rax, rdi
 	RET
 
@@ -20,25 +25,22 @@ _strcpy_end:
 	GLOBAL	strncpy
 strncpy:
 	XOR	rcx, rcx
-	DEC	rcx
+	CMP	rsi, 0
+	JE	_strncpy_final
+	CMP	rdi, 0
+	JE	_strncpy_final
 _strncpy_loop:
-	CMP	rdx, rcx
+	CMP	rdx, 0
 	JE	_strncpy_end
-	CMP	byte [rsi + rcx], BYTE 0
-	JE	_strncpy_loop_end
+	CMP	BYTE [rsi + rcx], BYTE 0
+	JE	_strncpy_final
 	MOV	al, BYTE [rsi + rcx]
 	MOV	BYTE [rdi + rcx], al
 	INC	rcx
+	DEC	rdx
 	JMP	_strncpy_loop
-;; until the \0, create \0 in the string
-_strncpy_loop_end:
-	CMP	rdx, rcx
-	JE	_strncpy_end
-	MOV	BYTE [rdi + rcx], 0
-	INC	rcx
-	CMP	byte [rsi + rcx], BYTE 0
-	JE	_strncpy_loop_end
-	JMP	_strncpy_loop
+_strncpy_final:
+	MOV	[rdi + rcx], BYTE 0
 _strncpy_end:
 	MOV	rax, rdi
 	RET

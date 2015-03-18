@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Tue Mar 17 16:18:33 2015 Arthur Poulet
+## Last update Wed Mar 18 17:02:37 2015 Arthur Poulet
 ##
 
 NAME		=	libasm.so
@@ -16,13 +16,13 @@ SRCSTEST	=	main.c
 
 SRCS		=	strlen.S \
 			strcmp.S \
-			strcpy.S \
-			memset.S \
-			memcpy.S \
-			index.S \
-			strstr.S \
-			strmore.S \
-			strdup.S
+			strcpy.S
+			# memset.S
+			# index.S
+			# strstr.S
+			# strmore.S
+			# strdup.S
+			# memcpy.S
 
 OBJS		=	$(SRCS:.S=.o)
 

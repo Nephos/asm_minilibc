@@ -161,6 +161,11 @@ int	test_memcpy()
   memcpy(str, S1, strlen(S1));
   printf("%s == %s\n", str, S1);
   assert(strcmp(S1, str) == 0);
+  memcpy(str + strlen(S1), S1, strlen(S1));
+  printf("%s != %s\n", str, S1);
+  assert(strcmp(S1, str) != 0);
+  printf("%s == %s\n", str + 9, S1);
+  assert(strcmp(S1, str + 8) != 0);
   return (0);
 }
 
@@ -283,8 +288,8 @@ int	main()
   printf("\ntest MEMCPY\n");
   test_memcpy();
 
-  /* printf("\ntest MEMMOVE\n"); */
-  /* test_memmove(); */
+  printf("\ntest MEMMOVE\n");
+  test_memmove();
 
   printf("\ntest STRCPY\n");
   test_strcpy();
