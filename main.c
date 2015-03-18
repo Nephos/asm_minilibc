@@ -21,6 +21,7 @@ char	*strchr(const char *s, int c);
 char	*strstr(const char *haystack, const char *needle);
 char	*strpbrk(const char *s, const char *accept);
 size_t	strcspn(const char *s, const char *reject);
+char	*strdup(const char *s);
 
 int	test_strlen()
 {
@@ -66,11 +67,18 @@ int	test_strcmp()
 
 int	test_strcasecmp()
 {
-  char	*s1 = "aaa";
-  char	*s2 = "bbb";
-  char	*s3 = "AAA";
-  char	*s4 = "BBB";
-  char	*s5 = "aAb";
+  char	*s1 = strdup("aaa");
+  char	*s2 = strdup("bbb");
+  char	*s3 = strdup("AAA");
+  char	*s4 = strdup("BBB");
+  char	*s5 = strdup("aAb");
+  char	*s6 = strdup("aaB");
+  s1[0] = 'a';
+  s2[0] = 'b';
+  s3[0] = 'A';
+  s4[0] = 'B';
+  s5[0] = 'a';
+  s6[0] = 'a';
 
   printf("%s == %s = %i\n", s1, s1, strcasecmp(s1, s1));
   assert(strcasecmp(s1, s1) == 0);
@@ -84,6 +92,10 @@ int	test_strcasecmp()
   assert(strcasecmp(s1, s5) < 0);
   printf("%s > %s  = %i\n", s5, s1, strcasecmp(s5, s1));
   assert(strcasecmp(s5, s1) > 0);
+  printf("%s == %s = %i\n", s5, s6, strcasecmp(s5, s6));
+  assert(strcasecmp(s5, s6) == 0);
+  printf("%s < %s = %i\n", s1, s6, strcasecmp(s1, s6));
+  assert(strcasecmp(s1, s6) < 0);
   return (0);
 }
 

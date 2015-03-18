@@ -31,7 +31,7 @@ _lowercase:
 	JL	_lowercase_end
 	CMP	al, BYTE 'Z'
 	JG	_lowercase_end
-	ADD	al, 32
+	XOR	al, 32		; remove the bit 32 = add 32
 	;; JMP	_lowercase_end
 _lowercase_end:
 	RET
