@@ -9,7 +9,7 @@ strcasecmp OK
 rindex OK
 strstr OK
 strpbrk OK
-strcspn EN COURS
+strcspn OK
 
 strdup OK
 index OK (= strchr)
