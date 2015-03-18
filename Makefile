@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Wed Mar 18 18:20:53 2015 Arthur Poulet
+## Last update Wed Mar 18 18:55:16 2015 Arthur Poulet
 ##
 
 NAME		=	libasm.so
@@ -34,7 +34,7 @@ CC		=	gcc
 
 NASMFLAGS	=	-f elf64
 
-CFLAGS		=	-c -Wall -Wextra -Werror -g
+CFLAGS		=	-c -Wall -Wextra -Werror
 
 RM		=	rm -f
 
