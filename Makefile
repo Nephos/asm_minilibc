@@ -5,7 +5,7 @@
 ## Login   <poulet_a@epitech.net>
 ##
 ## Started on  Wed Feb 11 17:14:59 2015 Arthur Poulet
-## Last update Wed Mar 18 18:55:16 2015 Arthur Poulet
+## Last update Fri Mar 20 03:05:55 2015 Arthur Poulet
 ##
 
 NAME		=	libasm.so
@@ -14,17 +14,35 @@ NAMETEST	=	testing
 
 SRCSTEST	=	main.c
 
-SRCS		=	strlen.S \
-			strcmp.S \
-			strcpy.S \
-			index.S \
-			strstr.S \
-			memset.S \
-			strmore.S \
-			memcpy.S \
-			strdup.S
+SRCS_64		=	strlen_64.S \
+			strcmp_64.S \
+			strcpy_64.S \
+			index_64.S \
+			strstr_64.S \
+			memset_64.S \
+			strmore_64.S \
+			memcpy_64.S \
+			strdup_64.S
 
-OBJS		=	$(SRCS:.S=.o)
+SRCS_32		=	strlen_32.S \
+			strcmp_32.S \
+			strcpy_32.S \
+			index_32.S \
+			strstr_32.S \
+			memset_32.S \
+			strmore_32.S \
+			memcpy_32.S \
+			strdup_32.S
+
+OBJS_64		=	$(SRCS_64:.S=.o)
+
+OBJS_32		=	$(SRCS_32:.S=.o)
+
+ifeq ($(shell uname -m | grep -o 64), 64)
+OBJS		=	$(OBJS_64)
+else
+OBJS		=	$(OBJS_32)
+endif
 
 OBJSTEST	=	$(SRCSTEST:.c=.o)
 
@@ -52,7 +70,7 @@ $(NAME):	$(OBJS)
 		$(CC) $(CFLAGS) -o $@ $<
 
 clean:
-		$(RM) $(OBJS)
+		$(RM) $(OBJS_64) $(OBJS_32)
 		$(RM) $(OBJSTEST)
 
 fclean:		clean
